@@ -1,3 +1,26 @@
 #!/bin/bash
-matlab -nojvm -r "cd('/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/scripts/matlab_evaluation/'); Evaluate_PSNR_SSIM '/n/pfister_lab2/Lab/akash/Deblurring/datasets/benchmark/Set14/HR/' '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/results-Set14/' 2 _x2_SR '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/matlab_eval/set14_edsr_x2_pretrained.txt' set14_edsr_x2_pretrained .png; Evaluate_PSNR_SSIM '/n/pfister_lab2/Lab/akash/Deblurring/datasets/benchmark/Set5/HR/' '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/results-Set5/' 2 _x2_SR '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/matlab_eval/set5_edsr_x2_pretrained.txt' set5_edsr_x2_pretrained .png; Evaluate_PSNR_SSIM '/n/pfister_lab2/Lab/akash/Deblurring/datasets/benchmark/Manga109/HR/' '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/results-Manga109/' 2 _x2_SR '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/matlab_eval/Manga109_edsr_x2_pretrained.txt' Manga109_edsr_x2_pretrained .png; Evaluate_PSNR_SSIM '/n/pfister_lab2/Lab/akash/Deblurring/datasets/benchmark/B100/HR/' '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/results-B100/' 2 _x2_SR '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/matlab_eval/B100_edsr_x2_pretrained.txt' B100_edsr_x2_pretrained .png; Evaluate_PSNR_SSIM '/n/pfister_lab2/Lab/akash/Deblurring/datasets/benchmark/Urban100/HR/' '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/results-Urban100/' 2 _x2_SR '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/matlab_eval/Urban100_edsr_x2_pretrained.txt' Urban100_edsr_x2_pretrained .png; Evaluate_PSNR_SSIM '/n/pfister_lab2/Lab/akash/Deblurring/datasets/benchmark/DIV2K_100_eval/' '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/results-DIV2K/' 2 _x2_SR '/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/benchmark_results_edsr_x2/matlab_eval/DIV2K-100_edsr_x2_pretrained.txt' DIV2K-100_edsr_x2_pretrained .png; "
+
+# {1} : scale. Ex: 2, 3, 4
+# {2} : model output folder. Ex: benchmark_resutls_edsr_x2
+# modify datasets_folder and results_folder according to your system if needed
+
+scale=${1}
+datasets_folder="/n/pfister_lab2/Lab/akash/Deblurring/datasets/benchmark/"
+results_folder="/n/pfister_lab2/Lab/akash/Deblurring/EDSR-PyTorch/experiment/${2}/"
+suffix="_x${scale}_SR"
+get_eval() { echo "Evaluate_PSNR_SSIM '${datasets_folder}${1}/HR' '${results_folder}results-${1}' ${scale} ${suffix} '${results_folder}matlab_eval/${1}.txt' ${1} .png"; }
+
+echo "Scale: ${scale}"
+echo "Dataset Folder: ${datasets_folder}"
+echo "Results folder: ${results_folder}"
+echo "Suffix: ${suffix}"
+echo "Sample command: $(get_eval sample)"
+
+eval_set5=$(get_eval Set5)
+eval_set14=$(get_eval Set14)
+eval_manga109=$(get_eval Manga109)
+eval_urban100=$(get_eval Urban100)
+eval_b100=$(get_eval B100)
+eval_div2k=$(get_eval DIV2K)
+matlab -nojvm -r "${eval_set5}; ${eval_set14}; ${eval_manga109}; ${eval_urban100}; ${eval_b100}; ${eval_div2k}; exit;"
 

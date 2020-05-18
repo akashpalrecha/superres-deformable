@@ -25,7 +25,11 @@ function Evaluate_PSNR_SSIM(hr_folder, sr_folder, scale, suffix, output_file, ta
     dirVar = dir(hr_pattern);
     hr_filenames = {dirVar.name};
     total = length(hr_filenames);
-    
+    [folder, name, ext] = fileparts(output_file);
+    if ~exist(folder, 'dir')
+        mkdir(folder)
+    end
+    display(output_file)
     results = fopen(output_file, 'wt');
     fprintf(results, "********* EVALUTAION OUTPUT *********\n");
     fprintf(results, tag+"\n");
