@@ -1,5 +1,5 @@
 from model import common
-from deformable_kernels.deformable_kernels.modules import DeformKernelConv2d
+from model.deformable_kernels.deformable_kernels.modules import DeformKernelConv2d
 import torch.nn as nn
 
 url = {
