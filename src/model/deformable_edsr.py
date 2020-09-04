@@ -1,5 +1,6 @@
 from model import common
-from model.deformable_kernels.deformable_kernels.modules import DeformKernelConv2d
+# from model.deformable_kernels.deformable_kernels.modules import DeformKernelConv2d
+from mmcv.ops import DeformConv2dPack
 import torch.nn as nn
 
 url = {
@@ -11,9 +12,10 @@ url = {
     'r32f256x4': 'https://cv.snu.ac.kr/research/EDSR/models/edsr_x4-4f62e9ef.pt'
 }
  
-def deformable_conv(in_channels, out_channels, kernel_size, bias=False):
-    return DeformKernelConv2d((4,4,), in_channels, out_channels, kernel_size=kernel_size, 
-                              padding=(kernel_size//2), bias=False, groups=in_channels)
+def deformable_conv(in_channels, out_channels, kernel_size, bias=True):
+    return DeformConv2dPack(in_channels, out_channels, kernel_size=kernel_size, 
+                            padding=(kernel_size//2), stride=1, bias=bias, 
+                            groups=in_channels)
   
     
 def make_model(args, parent=False):
