@@ -8,12 +8,14 @@
 #SBATCH -o /n/home00/apalrecha/lab/Deblurring/EDSR-PyTorch/experiment/slurm_output/deformable_edsr_baseline_x2_%j.out
 #SBATCH -e /n/home00/apalrecha/lab/Deblurring/EDSR-PyTorch/experiment/slurm_output/deformable_edsr_baseline_x2_%j.err
 
-echo "Settinp up env. Loading Conda, etc..."
+echo "Settinp up env. Loading Conda, etc ..."
 source ~/.bashrc
 cd /n/home00/apalrecha/lab
-echo "Activating EDSR conda environment"
+echo "Activating EDSR conda environment ..."
 source activate envs/edsr
-echo "Done"
+echo "Loading cuda/10.1.243-fasrc01 ..."
+module load cuda/10.1.243-fasrc01
+echo "Setup Done!"
 cd Deblurring/EDSR-PyTorch/src/
 echo ""
 echo "---- BEGIN TRAINING ----"
