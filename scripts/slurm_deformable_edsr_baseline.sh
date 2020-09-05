@@ -20,7 +20,7 @@ cd Deblurring/EDSR-PyTorch/src/
 echo ""
 echo "---- BEGIN TRAINING ----"
 echo ""
-python main.py --model deformable_edsr --scale 2 --patch_size 96 --save deformable_edsr_baseline_x2 --reset --ext sep
+python main.py --model deformable_edsr --scale 2 --patch_size 96 --save deformable_edsr_baseline_x2 --ext sep
 echo ""
 echo "---- TRAINING COMPLETE ----"
 echo ""
