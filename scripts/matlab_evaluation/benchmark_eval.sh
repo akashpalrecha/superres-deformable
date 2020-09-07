@@ -18,7 +18,7 @@ echo "Sample command: $(get_eval sample)"
 
 eval_set5=$(get_eval Set5)
 eval_set14=$(get_eval Set14)
-eval_manga109=$(get_eval Manga109)
+# eval_manga109=$(get_eval Manga109)
 eval_urban100=$(get_eval Urban100)
 eval_b100=$(get_eval B100)
 eval_div2k=$(get_eval DIV2K)
