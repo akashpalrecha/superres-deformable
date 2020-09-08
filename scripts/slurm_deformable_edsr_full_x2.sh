@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -n 8
 #SBATCH -N 1
-#SBATCH -t 3-0:00
+#SBATCH -t 2-6:00
 #SBATCH -p gpu_requeue
 #SBATCH --gres=gpu:1
 #SBATCH --mem=32768
@@ -20,7 +20,7 @@ cd Deblurring/EDSR-PyTorch/src/
 echo ""
 echo "---- BEGIN TRAINING ----"
 echo ""
-python main.py --model deformable_edsr --scale 2 --save deformable_edsr_baseline_x2 --ext sep --res_scale 0.1 --data_test Set5+Set14+B100+Urban100+Manga109+DIV2K --data_range 801-900 --save_results
+python main.py --model deformable_edsr --scale 2 --save deformable_edsr_full_x2 --ext sep --n_resblocks 32 --n_feats 256 --res_scale 0.1 --data_test Set5+Set14+B100+Urban100+Manga109+DIV2K --data_range 801-900 --save_results
 echo ""
 echo "---- TRAINING COMPLETE ----"
 echo ""
