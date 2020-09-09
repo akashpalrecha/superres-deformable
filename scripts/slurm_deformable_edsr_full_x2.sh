@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -n 8
 #SBATCH -N 1
-#SBATCH -t 2-6:00
+#SBATCH -t 25-0:00
 #SBATCH -p gpu_requeue
 #SBATCH --gres=gpu:1
 #SBATCH --mem=32768

@@ -20,7 +20,13 @@ cd Deblurring/EDSR-PyTorch/src/
 echo ""
 echo "---- BEGIN TRAINING ----"
 echo ""
-python main.py --model deformable_edsr --scale 2 --save deformable_edsr_baseline_x2 --ext sep --res_scale 0.1 --data_test Set5+Set14+B100+Urban100+Manga109+DIV2K --data_range 801-900 --save_results
+python main.py --model deformable_edsr --res_scale 0.1 --scale 2 --ext sep --save_results --save deformable_edsr_baseline_x2
 echo ""
 echo "---- TRAINING COMPLETE ----"
+echo ""
+echo "---- BEGIN TESTING ----"
+echo ""
+python main.py --model deformable_edsr --res_scale 0.1 --scale 2 --ext sep --save_results --save deformable_edsr_baseline_x2/results --pre_train ../experiment/deformable_edsr_baseline_x2/model/model_best.pt --test_only --data_test Set5+Set14+B100+Urban100+Manga109+DIV2K --data_range 801-900
+echo ""
+echo "---- TESTING COMPLETE ----"
 echo ""
