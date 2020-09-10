@@ -1,5 +1,12 @@
 def set_template(args):
     # Set the templates here
+    if args.template.find('deformable_rcan') >= 0:
+        args.model = 'deformable_rcan'
+        args.n_resgroups = 10
+        args.n_resblocks = 20
+        args.n_feats = 64
+        args.chop = True
+        
     if args.template.find('jpeg') >= 0:
         args.data_train = 'DIV2K_jpeg'
         args.data_test = 'DIV2K_jpeg'
