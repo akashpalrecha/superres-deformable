@@ -2,7 +2,7 @@
 #SBATCH -n 8
 #SBATCH -N 1
 #SBATCH -t 3-0:00
-#SBATCH -p gpu_requeue
+#SBATCH -p seas_gpu
 #SBATCH --gres=gpu:1
 #SBATCH --mem=32768
 #SBATCH -o /n/home00/apalrecha/lab/Deblurring/EDSR-PyTorch/experiment/slurm_output/deformable_edsr_baseline_x2_%j.out
