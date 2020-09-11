@@ -21,11 +21,11 @@ echo ""
 echo "---- BEGIN TRAINING ----"
 echo ""
 echo "---- NOW TRAINING DEFORMABLE EDSR ----"
-python main.py --model deformable_edsr --res_scale 0.1 --scale 2 --save one_deformable_edsr_baseline_x2_100 --ext sep --save_results --one_deformable_block
+python main.py --model deformable_edsr --res_scale 0.1 --scale 2 --save one_deformable_edsr_baseline_x2_100 --ext sep --save_results --epochs 100 --one_deformable_block
 echo ""
 echo ""
 echo "---- NOW TRAINING PLAIN EDSR ----"
-python main.py --model EDSR            --res_scale 0.1 --scale 2 --save edsr_baseline_x2_100                --ext sep --save_results
+python main.py --model EDSR            --res_scale 0.1 --scale 2 --save edsr_baseline_x2_100                --ext sep --save_results --epochs 100
 echo ""
 echo "---- TRAINING COMPLETE ----"
 echo ""
