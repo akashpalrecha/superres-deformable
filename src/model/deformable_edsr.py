@@ -42,12 +42,21 @@ class DeformableEDSR(nn.Module):
         m_head = [conv(args.n_colors, n_feats, kernel_size)]
 
         # define body module
-        m_body = [
-            common.ResBlock(
-                dkconv, n_feats, kernel_size, act=act, res_scale=args.res_scale
-            ) for _ in range(n_resblocks)
-        ]
-        m_body.append(dkconv(n_feats, n_feats, kernel_size))
+        m_body = []
+        if not args.one_deformable_block:
+            m_body = [
+                common.ResBlock(
+                    dkconv, n_feats, kernel_size, act=act, res_scale=args.res_scale
+                ) for _ in range(n_resblocks)
+            ]
+            m_body.append(dkconv(n_feats, n_feats, kernel_size))
+        else:
+            for i in range(n_resblocks-1):
+                m_body.append(common.ResBlock(conv, n_feats, kernel_size, 
+                                              act=act, res_scale=args.res_scale))
+            
+            m_body.append(common.ResBlock(dkconv, n_feats, kernel_size, act=act, res_scale=args.res_scale))
+            m_body.append(conv(n_feats, n_feats, kernel_size))
 
         # define tail module
         m_tail = [

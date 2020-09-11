@@ -82,6 +82,10 @@ parser.add_argument('--n_resgroups', type=int, default=10,
 parser.add_argument('--reduction', type=int, default=16,
                     help='number of feature maps reduction')
 
+# Options for deformable blocks
+parser.add_argument('--one_deformable_block', action='store_true',
+                    help='add only one deformable block at the end of body of module')
+
 # Training specifications
 parser.add_argument('--reset', action='store_true',
                     help='reset the training')
