@@ -86,6 +86,10 @@ parser.add_argument('--reduction', type=int, default=16,
 parser.add_argument('--one_deformable_block', action='store_true',
                     help='add only one deformable block at the end of body of module')
 
+# Options for context gated convolutions
+parser.add_argument('--one_cgc_block', action='store_true',
+                    help='add only one context gated resblock at the end of body of module')
+
 # Training specifications
 parser.add_argument('--reset', action='store_true',
                     help='reset the training')
