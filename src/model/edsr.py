@@ -17,7 +17,7 @@ def make_model(args, parent=False):
 class EDSR(nn.Module):
     def __init__(self, args, conv=common.default_conv):
         super(EDSR, self).__init__()
-
+        
         n_resblocks = args.n_resblocks
         n_feats = args.n_feats
         kernel_size = 3 
@@ -28,11 +28,15 @@ class EDSR(nn.Module):
             self.url = url[url_name]
         else:
             self.url = None
-        self.sub_mean = common.MeanShift(args.rgb_range, args.n_colors)
-        self.add_mean = common.MeanShift(args.rgb_range, args.n_colors, sign=1)
+        if not args.use_fourier_features:
+            self.sub_mean = common.MeanShift(args.rgb_range, args.n_colors)
+            self.add_mean = common.MeanShift(args.rgb_range, args.n_colors, sign=1)
 
         # define head module
-        m_head = [conv(args.n_colors, n_feats, kernel_size)]
+        m_head = []
+        if not args.use_fourier_features:
+            m_head.append(self.sub_mean)
+        m_head.append(conv(args.n_colors, n_feats, kernel_size))
 
         # define body module
         m_body = [
@@ -47,20 +51,22 @@ class EDSR(nn.Module):
             common.Upsampler(conv, scale, n_feats, act=False),
             conv(n_feats, args.n_colors, kernel_size)
         ]
+        if not args.use_fourier_features:
+            m_tail.append(self.add_mean)
 
         self.head = nn.Sequential(*m_head)
         self.body = nn.Sequential(*m_body)
         self.tail = nn.Sequential(*m_tail)
 
     def forward(self, x):
-        x = self.sub_mean(x)
+        # x = self.sub_mean(x)
         x = self.head(x)
 
         res = self.body(x)
         res += x
 
         x = self.tail(res)
-        x = self.add_mean(x)
+        # x = self.add_mean(x)
 
         return x 
 
