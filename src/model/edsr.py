@@ -28,8 +28,8 @@ class EDSR(nn.Module):
             self.url = url[url_name]
         else:
             self.url = None
-        self.sub_mean = common.MeanShift(args.rgb_range)
-        self.add_mean = common.MeanShift(args.rgb_range, sign=1)
+        self.sub_mean = common.MeanShift(args.rgb_range, args.n_colors)
+        self.add_mean = common.MeanShift(args.rgb_range, args.n_colors, sign=1)
 
         # define head module
         m_head = [conv(args.n_colors, n_feats, kernel_size)]
