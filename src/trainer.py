@@ -41,7 +41,7 @@ class Trainer():
         self.loader_train.dataset.set_scale(0)
         for batch, (lr, hr, _,) in enumerate(self.loader_train):
             lr, hr = self.prepare(lr, hr)
-            if args.use_fourier_features:
+            if self.args.use_fourier_features:
                 lr, hr = fft_image(lr), fft_image(hr)
             timer_data.hold()
             timer_model.tic()
@@ -91,7 +91,7 @@ class Trainer():
                 for lr, hr, filename in tqdm(d, ncols=80):
                     lr, hr = self.prepare(lr, hr)
                     
-                    if args.use_fourier_features: 
+                    if self.args.use_fourier_features: 
                         sr = ifft_image(self.model(fft_image(lr), idx_scale))
                     else:
                         sr = self.model(lr, idx_scale)
