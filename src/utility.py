@@ -164,7 +164,7 @@ def quantize(img, rgb_range):
 
 def calc_psnr(sr, hr, scale, rgb_range, dataset=None):
     if hr.nelement() == 1: return 0
-
+    
     diff = (sr - hr) / rgb_range
     if dataset and dataset.dataset.benchmark:
         shave = scale
@@ -235,3 +235,24 @@ def make_optimizer(args, target):
     optimizer._register_scheduler(scheduler_class, **kwargs_scheduler)
     return optimizer
 
+def fft_image(img, stack=True, normalized=True, onesided=False):
+    res = torch.rfft(img, 2, normalized=normalized, onesided=onesided)
+    if stack:
+        if len(img.shape) == 4: # Input is a batch of images
+            return torch.cat([res[:,:,:,:,0], res[:,:,:,:,0]], dim=1)
+        else:
+            return torch.cat([res[:,:,:,0], res[:,:,:,0]], dim=0)
+    else:
+        return res
+    
+def ifft_image(img, stacked=True, normalized=True, onesided=False):
+    if stacked: # undoing the stacking done by fft_image
+        if len(img.shape) == 4: # Input was a batch of images
+            channels = img.shape[1] // 2
+            img = torch.stack([img[:, :channels], img[:, channels:]], dim=-1)
+        else:
+            channels = img.shape[0] // 2
+            img = torch.stack([img[:channels], img[channels:]], dim=-1)
+            
+    res = torch.irfft(img, signal_ndim=2, normalized=normalized, onesided=onesided)
+    return res

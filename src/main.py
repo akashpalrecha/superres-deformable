@@ -12,6 +12,8 @@ checkpoint = utility.checkpoint(args)
 
 def main():
     global model
+    if args.use_fourier_features:
+        args.n_colors *= 2
     if args.data_test == ['video']:
         from videotester import VideoTester
         model = model.Model(args, checkpoint)

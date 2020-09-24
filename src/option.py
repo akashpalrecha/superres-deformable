@@ -43,6 +43,8 @@ parser.add_argument('--chop', action='store_true',
                     help='enable memory-efficient forward')
 parser.add_argument('--no_augment', action='store_true',
                     help='do not use data augmentation')
+parser.add_argument('--user_fourier_features', action='store_true',
+                    help='Convert data to the frequency domain while training and testing')
 
 # Model specifications
 parser.add_argument('--model', default='EDSR',
