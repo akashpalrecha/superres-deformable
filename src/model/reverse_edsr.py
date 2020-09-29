@@ -16,7 +16,7 @@ def make_model(args, parent=False):
 
 class ReverseEDSR(nn.Module):
     def __init__(self, args, conv=common.default_conv):
-        super(EDSR, self).__init__()
+        super(ReverseEDSR, self).__init__()
         
         n_resblocks = args.n_resblocks
         n_feats = args.n_feats
