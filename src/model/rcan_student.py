@@ -106,15 +106,13 @@ class RCAN_Student(nn.Module):
         feature_maps = []
         x = self.sub_mean(x)
         x = self.head(x)
-        feature_maps.append(x)
+        # feature_maps.append(x)
 
         res = x
         for group_id in range(self.n_resgroups):
             res, residual = getattr(self, 'body_group{}'.format(str(group_id)))(res)
-            if group_id == 2 or group_id == 6:
-                feature_maps.append(res)
         res = self.body_tail(res)
-        feature_maps.append(res)
+        # feature_maps.append(res)
         
         res += x
 
@@ -122,7 +120,7 @@ class RCAN_Student(nn.Module):
         x = self.tail(res)
         x = self.add_mean(x)
 
-        return feature_maps, x 
+        return x 
 
 
                 
