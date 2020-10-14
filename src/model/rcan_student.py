@@ -1,4 +1,4 @@
-import models.common as common
+import model.common as common
 import torch
 import torch.nn as nn
 
