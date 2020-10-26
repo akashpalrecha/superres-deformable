@@ -23,7 +23,7 @@ cd Deblurring/EDSR-PyTorch/src/
 echo ""
 echo "---- BEGIN TRAINING ----"
 echo ""
-python main.py --model rcan     --n_resgroups 6 --n_resblocks 6 --n_feats 64 --scale 2 --ext sep --save_results --save rcan_10_6_baseline_x2     --epochs 100
+python main.py --model rcan     --n_resgroups 10 --n_resblocks 6 --n_feats 64 --scale 2 --ext sep --save_results --save rcan_10_6_baseline_x2     --epochs 100
 echo ""
 echo "---- TRAINING COMPLETE ----"
 
@@ -32,13 +32,15 @@ echo "---- BEGIN TESTING ----"
 
 echo ""
 echo "Start generating results"
-python main.py --model rcan     --n_resgroups 6 --n_resblocks 6 --n_feats 64 --scale 2 --ext sep --save_results --save rcan_10_6_baseline_x2/results     --pre_train ../experiment/rcan_10_6_baseline_x2/model/model_best.pt     --test_only --data_test Set5+Set14+B100+Urban100+Manga109+DIV2K --data_range 801-900
+python main.py --model rcan     --n_resgroups 10 --n_resblocks 6 --n_feats 64 --scale 2 --ext sep --save_results --save rcan_10_6_baseline_x2/results     --pre_train ../experiment/rcan_10_6_baseline_x2/model/model_best.pt     --test_only --data_test Set5+Set14+B100+Urban100+Manga109+DIV2K --data_range 801-900
+python main.py --model rcan     --n_resgroups 10 --n_resblocks 6 --n_feats 64 --scale 2 --ext sep --save_results --save rcan_10_6_baseline_x2/results_latest     --pre_train ../experiment/rcan_10_6_baseline_x2/model/model_latest.pt     --test_only --data_test Set5+Set14+B100+Urban100+Manga109+DIV2K --data_range 801-900
 echo ""
 
 echo "Start MATLAB Testing"
 echo ""
 cd ../scripts/matlab_evaluation
 ./benchmark_eval.sh 2 rcan_10_6_baseline_x2/results
+./benchmark_eval.sh 2 rcan_10_6_baseline_x2/results_latest
 echo ""
 
 echo "---- TESTING COMPLETE ----"
