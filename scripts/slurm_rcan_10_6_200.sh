@@ -26,7 +26,7 @@ cd Deblurring/EDSR-PyTorch/src/
 echo ""
 echo "---- BEGIN TRAINING ----"
 echo ""
-python main.py --model rcan --n_resgroups 10 --n_resblocks 6 --n_feats 64 --scale 2 --ext sep --save_results --save rcan_10_6_200_baseline_x2 --epochs 200
+python main.py --model rcan --n_resgroups 10 --n_resblocks 6 --n_feats 64 --scale 2 --ext sep --save_results --save rcan_10_6_200_baseline_x2 --epochs 200 --resume -1
 echo ""
 echo "---- TRAINING COMPLETE ----"
 
