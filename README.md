@@ -1,3 +1,9 @@
+# Note:
+This repository contains all the code which I used to research on and improve various methods used for Super-resolution applications. This was part of my final year thesis at *Harvard University*. During the course of my work, I tried a lot of things, notably includig Deformable Convolutions, Context Gated Convolutions, SA-Convolutions, etc. 
+
+
+---
+
 **About PyTorch 1.2.0**
   * Now the master branch supports PyTorch 1.2.0 by default.
   * Due to the serious version problem (especially torch.utils.data.dataloader), MDSR functions are temporarily disabled. If you have to train/evaluate the MDSR model, please use legacy branches.
