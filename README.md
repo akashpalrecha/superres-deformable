@@ -1,5 +1,5 @@
 # Note:
-This repository contains all the code which I used to research on and improve various methods used for Super-resolution applications. This was part of my final year thesis at *Harvard University*. During the course of my work, I tried a lot of things, notably includig Deformable Convolutions, Context Gated Convolutions, SA-Convolutions, etc. 
+This repository contains all the code which I used to research on and improve various methods used for Super-resolution applications. This was part of my final year thesis at **Harvard University**. During the course of my work, I tried a lot of things, notably includig Deformable Convolutions, Context Gated Convolutions, SA-Convolutions, etc. 
 
 
 ---
